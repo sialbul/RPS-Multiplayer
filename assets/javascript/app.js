@@ -21,8 +21,8 @@ $(document).ready(function () {
     var user1 = {};
     var user2 = {};
     var turn = 1
-    var S = 0;
-    var S = 0;
+    var user1Score = 0;
+    var user2Score = 0;
 
 
     $("#submitBtn").click(function (startGame) {
@@ -48,13 +48,13 @@ $(document).ready(function () {
 
     })
 
-    database.ref("players").on("value", function (snapshot) {
+    database.ref("/players/").on("value", function (snapshot) {
         if (snapshot.child("user1").exists()) {
             user1 = snapshot.val().user1;
-            $("#S").text(user1.win)
+            $("#user1Score").text(user1.win)
         } if (snapshot.child("user2").exists()) {
             user2 = snapshot.val().user2;
-            $("#S").text(user2.win)
+            $("#user2Score").text(user2.win)
         };
     });
 
@@ -147,5 +147,7 @@ function resultCompare() {
     };
     turn = 1
     database.ref().child("/turn").set(1);
+
+
 };
 })
