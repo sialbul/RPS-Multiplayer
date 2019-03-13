@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Rock Paper Scissors MultiPlayer</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css" />
+    <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase.js"></script>
+
+</head>
+
+<body>
+    <div class="jumbotron">
+        <h1>Rock Paper Siccors</h1>
+
+    </div>
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-3">
+                <div class="container2">
+                    <label>
+                        <h4><strong>Enter Your Name</strong></h4>
+                    </label>
+                    <input type="name" id="userName1-input" placeholder="Name">
+                    <button type="submit" id="submitBtn">Submit</button>
+                </div>
+                <div class="container4">
+                    <h2 id="user1-view"></h2>
+                </div>
+                <div id="user1Choices" class="choices">
+                    <div class="row">
+                        <span style='font-size:50px; margin-left: 25px;'>&#8663;</span>
+                        <img class="choice1" src="assets/images/rock.png" alt="rock" value="rock" height="60px">
+                        <span style='font-size:50px;'>&#8664;</span>
+                    </div>
+                    <div class="row">
+                        <img class="choice1" src="assets/images/paper.png" alt="paper" value="paper" height="60px">
+                        <span style='font-size:50px;'>&#8656;</span>
+                        <img class="choice1" src="assets/images/scissors.png" alt="scissors" value="scissors"
+                            height="60px">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="panel-body panelStats text-center">
+                        <div class="stats" id="user2Stats"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6" id="middleScreen">
+
+                <div class="scoreBoard">
+                    <div id="user1" class="badge"> Player1</div>
+                    <div id="user2" class="badge">Player2</div>
+                    <span id="user1Score">0</span>:<span id="user2Score">0</span>
+                </div>
+
+                <div class="results">
+                    <p id="message"></p>
+
+                    <p id="action"></p>
+                </div>
+                <div class="row">
+                    <div id="resultSection">
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="container3">
+                    <label>
+                        <h4><strong>Enter Your Name</strong></h4>
+                    </label>
+                    <input type="name" id="userName2-input" placeholder="Name">
+                    <button type="submit" id="submitBtn2">Submit</button>
+                </div>
+
+                <div class="container4">
+                    <h2 id="user2-view"></h2>
+                </div>
+
+                <div id="user2Choices" class="choices">
+                    <div class="row">
+                        <span style='font-size:50px; margin-left: 25px;'>&#8663;</span>
+                        <img class="choice2" src="assets/images/rock.png" alt="rock" value="rock" height="60px">
+                        <span style='font-size:50px;'>&#8664;</span>
+                    </div>
+                    <div class="row">
+                        <img class="choice2" src="assets/images/paper.png" alt="paper" value="paper" height="60px">
+                        <span style='font-size:50px;'>&#8656;</span>
+                        <img class="choice2" src="assets/images/scissors.png" alt="scissors" value="scissors"
+                            height="60px">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="panel-body panelStats text-center">
+                        <div class="stats" id="user2Stats"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <script src="assets/javascript/app.js"></script>
+
+</body>
+
+</html>
