@@ -1,4 +1,3 @@
-
 $(document).ready(function () {
 
     var config = {
@@ -14,77 +13,96 @@ $(document).ready(function () {
 
     //VARIABLES
     //-------------------------------------------------
-    var database = firebase.database();
 
-    var user1Choice = "";
-    var user2Choice = "";
     var user1 = {};
     var user2 = {};
-    var turn = 1
+    var user1Choice = "";
+    var user2Choice = "";
     var user1Score = 0;
     var user2Score = 0;
+    var turn = 1
 
-    database.ref("players").on("value", function (snapshot) {
 
+    var database = firebase.database();
+
+    database.ref("/players/").on("value", function (snapshot) {
         if (snapshot.child("user1").exists()) {
+            console.log("Player 1 exists");
+
             user1 = snapshot.val().user1;
             $("#user1Score").text(user1.win)
-        } if (snapshot.child("user2").exists()) {
-            user2 = snapshot.val().user2;
-            $("#user2Score").text(user2.win)
-        };
-
-        $("#submitBtn").click(function (startGame) {
-            event.preventDefault();
-            user1.name = $("#userName1-input").val().trim().toUpperCase();
             $("#user1-view").html("Take Your Pick");
             $("#user1Name").html(user1.name);
-            user1Name = snapshot.val().user1/name;
-            console.log(user1.name);
             $(".container2").hide();
+        } else {
+            console.log("Player 1 does NOt exist");
+            user1 = null;
 
-        })
+        }
 
-
-        $("#submitBtn2").click(function (startGame) {
-            event.preventDefault();
-
-            user2.name = $("#userName2-input").val().trim().toUpperCase();
+        if (snapshot.child("user2").exists()) {
+            user2 = snapshot.val().user2;
+            $("#user2Score").text(user2.win)
             $("#user2-view").html("Take Your Pick");
             $("#user2Name").html(user2.name);
-            user2Name = snapshot.val().user2/name;
-            console.log(user2.name);
             $(".container3").hide();
 
+        }
+        else {
+            console.log("Player 2 does NOt exist");
+            user1 = null;
 
-        })
-
-
-
+        }
     });
 
-
-    $(document).on("click", "#submitBtn", function (event) {
-        event.preventDefault()
-        user1 = {
-            name: user1.name,
+   
+    $("#submitBtn").click(function (startGame) {
+        event.preventDefault();
+        var user1Name = $("#userName1-input").val().trim().toUpperCase();
+        var user1Ref = database.ref("players/user1");
+        user1Ref.set({
+            name: user1Name,
             win: 0,
             choice: ""
-        }; console.log("user1");
-        database.ref("/players/user1").set(user1);
-        database.ref().child("turn").set(1);
+        });
+        user1Ref.onDisconnect().remove();
     });
-
-    $(document).on("click", "#submitBtn2", function (event) {
-        event.preventDefault()
-        user2 = {
-            name: user2.name,
+    $("#submitBtn2").click(function (startGame) {
+        event.preventDefault();
+        var user2Name = $("#userName2-input").val().trim().toUpperCase();
+        var user2Ref = database.ref("players/user2");
+        user2Ref.set({
+            name: user2Name,
             win: 0,
             choice: ""
-        }; console.log("user2");
-        database.ref("/players/user2").set(user2);
-        $("#action").text("Player 1 goes first.")
+        });
+        user2Ref.onDisconnect().remove();
+
     });
+
+    // $(document).on("click", "#submitBtn", function (event) {
+    //     event.preventDefault()
+    //     user1 = {
+    //         name: user1.name,
+    //         win: 0,
+    //         choice: ""
+    //     }; console.log("user1");
+    //     database.ref("/players/user1").set(user1);
+    //     database.ref().child("turn").set(1);
+    // });
+
+    // $(document).on("click", "#submitBtn2", function (event) {
+    //     event.preventDefault()
+    //     user2 = {
+    //         name: user2.name,
+    //         win: 0,
+    //         choice: ""
+    //     }; console.log("user2");
+    //     database.ref("/players/user2").set(user2);
+    //     $("#action").text("Player 1 goes first.")
+    // });
+
+
 
     $(document).on("click", ".choice1", function () {
         user1Choice = $(this).attr("value");
@@ -152,6 +170,9 @@ $(document).ready(function () {
         };
         turn = 1
         database.ref().child("/turn").set(1);
+
+
+
 
 
     };

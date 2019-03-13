@@ -51,13 +51,13 @@ h1 {
     padding: 3px 10px;
 }
 
-#user1 {
+#user1Name {
     position: absolute;
     top: 25px;
     left: -35px;
 }
 
-#user2 {
+#user2Name {
     position: absolute;
     top: 25px;
     right: -35px;
