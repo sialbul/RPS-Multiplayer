@@ -28,7 +28,6 @@ $(document).ready(function () {
 
         if (snapshot.child("user1").exists()) {
             user1 = snapshot.val().user1;
-            user1.name =snapshot.val().user1.name;
             $("#user1Score").text(user1.win)
         } if (snapshot.child("user2").exists()) {
             user2 = snapshot.val().user2;
@@ -38,10 +37,10 @@ $(document).ready(function () {
 
         $("#submitBtn").click(function (startGame) {
             event.preventDefault();
-
             user1.name = $("#userName1-input").val().trim().toUpperCase();
             $("#user1-view").html("Take Your Pick");
             $("#user1").html(user1.name);
+            $("#user1")=snapshot.val().user1.name;
             console.log(user1.name);
             $(".container2").hide();
         })
@@ -53,6 +52,7 @@ $(document).ready(function () {
             user2.name = $("#userName2-input").val().trim().toUpperCase();
             $("#user2-view").html("Take Your Pick");
             $("#user2").html(user2.name);
+            $("#user2")=snapshot.val().user2.name;
             console.log(user2.name);
             $(".container3").hide();
 
