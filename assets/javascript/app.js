@@ -24,7 +24,7 @@ $(document).ready(function () {
     var user1Score = 0;
     var user2Score = 0;
 
-
+    database.ref("/players/").on("value", function (snapshot) {
     $("#submitBtn").click(function (startGame) {
         event.preventDefault();
 
@@ -48,7 +48,7 @@ $(document).ready(function () {
 
     })
 
-    database.ref("/players/").on("value", function (snapshot) {
+   
         if (snapshot.child("user1").exists()) {
             user1 = snapshot.val().user1;
             $("#user1Score").text(user1.win)
